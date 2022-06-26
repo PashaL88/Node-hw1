@@ -1,3 +1,6 @@
+const { program } = require("commander");
+// const yargs = require("yargs");
+// const { hideBin } = require("yargs/helpers");
 const contacts = require("./contacts");
 
 async function invokeAction({ action, id, name, email, phone }) {
@@ -27,6 +30,20 @@ async function invokeAction({ action, id, name, email, phone }) {
   }
 }
 
+program
+  .option("-a,--action <type>")
+  .option("-i, --id <type>")
+  .option("-n, --name <type>")
+  .option("-e, --email <type>")
+  .option("-p, --phone <type>");
+
+program.parse(process.argv);
+const options = program.opts();
+invokeAction(options);
+// const arr = hideBin(process.argv);
+// const { argv } = yargs(arr);
+// invokeAction(argv);
+
 // invokeAction({ action: "listContacts" });
 // invokeAction({ action: "getContactById", id: "9" });
 // invokeAction({
@@ -35,4 +52,4 @@ async function invokeAction({ action, id, name, email, phone }) {
 //   email: "plobtsov@gmail.com",
 //   phone: "(093) 487-7197",
 // });
-invokeAction({ action: "removeContact", id: "62b843d77b0a7161f86071c9" });
+// invokeAction({ action: "removeContact", id: "62b843d77b0a7161f86071c9" });
